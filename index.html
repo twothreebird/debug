@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Debug | TwoThreeBird</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./img/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+    <style>
+      :root {
+          --color-dark: #141414;
+      }
+
+      body {
+          padding: 0;
+          margin: 0;
+          position: relative;
+      }
+
+      .logo {
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          top: 30px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          color: #fff;
+      }
+
+      #container {
+          width: 100%;
+          min-height: 100vh;
+          padding: 30px;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: var(--color-dark);
+          background-image: linear-gradient(var(--color-dark),#000)
+      }
+
+      #debug {
+          font-family: monospace;
+          font-size: 24px;
+          padding: 30px;
+          color: #fff;
+          text-align: center;
+          max-width: 600px;
+          line-height: 1.5;
+      }
+
+      #debug .debugging-tag {
+          background-color: #fff;
+          padding: 5px 10px;
+          margin-bottom: 20px;
+          display: inline-block;
+          font-size: 14px;
+          color: var(--color-dark);
+          text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo">
+      <svg viewBox="0 0 1282 1295" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M622.93 302.16C706.369 302.16 774.01 234.519 774.01 151.08C774.01 67.6408 706.369 0 622.93 0C539.491 0 471.85 67.6408 471.85 151.08C471.85 234.519 539.491 302.16 622.93 302.16Z" fill="currentColor"></path>
+        <path d="M1094.67 302.16C1178.11 302.16 1245.75 234.519 1245.75 151.08C1245.75 67.6408 1178.11 0 1094.67 0C1011.23 0 943.59 67.6408 943.59 151.08C943.59 234.519 1011.23 302.16 1094.67 302.16Z" fill="currentColor"></path>
+        <path d="M151.08 796.23C234.519 796.23 302.16 728.589 302.16 645.15C302.16 561.711 234.519 494.07 151.08 494.07C67.6408 494.07 0 561.711 0 645.15C0 728.589 67.6408 796.23 151.08 796.23Z" fill="currentColor"></path>
+        <path d="M622.93 796.23C706.369 796.23 774.01 728.589 774.01 645.15C774.01 561.711 706.369 494.07 622.93 494.07C539.491 494.07 471.85 561.711 471.85 645.15C471.85 728.589 539.491 796.23 622.93 796.23Z" fill="currentColor"></path>
+        <path d="M1094.67 796.23C1178.11 796.23 1245.75 728.589 1245.75 645.15C1245.75 561.711 1178.11 494.07 1094.67 494.07C1011.23 494.07 943.59 561.711 943.59 645.15C943.59 728.589 1011.23 796.23 1094.67 796.23Z" fill="currentColor"></path>
+        <path d="M1094.67 796.23C1178.11 796.23 1245.75 728.589 1245.75 645.15C1245.75 561.711 1178.11 494.07 1094.67 494.07C1011.23 494.07 943.59 561.711 943.59 645.15C943.59 728.589 1011.23 796.23 1094.67 796.23Z" fill="currentColor"></path>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M1245.75 1143.43C1245.75 1226.87 1178.11 1294.51 1094.67 1294.51C1050.34 1294.51 943.81 1294.42 943.81 1294.42C943.81 1294.42 943.59 1182.54 943.59 1143.43C943.59 1059.99 1011.23 992.35 1094.67 992.35C1153.96 992.35 1205.28 1026.5 1230.01 1076.21L1282 1096.97L1242.26 1110.97C1244.54 1121.43 1245.75 1132.29 1245.75 1143.43ZM1142.15 1092.61C1153.39 1092.61 1162.51 1083.49 1162.51 1072.25C1162.51 1061.01 1153.39 1051.89 1142.15 1051.89C1130.91 1051.89 1121.79 1061.01 1121.79 1072.25C1121.79 1083.49 1130.91 1092.61 1142.15 1092.61Z" fill="currentColor"></path>
+      </svg>
+    </div>
+    <div id="container">
+      <div id="debug"></div>
+    </div>
+    <script>
+      window.onload = function(){
+          const message = document.createElement("div");
+          message.innerText = "No debug message provided!";
+
+          const tag = document.createElement("span");
+          tag.classList.add("debugging-tag");
+          tag.innerText = "unknown tag";
+
+          const params = new URL(window.location).searchParams;
+          const paramsTag = params.get("tag");
+          const paramsMessage = params.get("message");
+
+          if (!!paramsTag) {
+              tag.innerText = paramsTag;
+          }
+
+          if (!!paramsMessage) {
+              message.innerText = paramsMessage;
+          }
+
+          const debugElement = document.getElementById("debug");
+          debugElement.appendChild(tag);
+          debugElement.appendChild(message);
+      };
+    </script>
+  </body>
+</html>
